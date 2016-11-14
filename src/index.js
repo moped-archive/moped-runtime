@@ -27,7 +27,7 @@ if (!COOKIE_SECRET) {
     COOKIE_SECRET = 'DEVELOPMENTCOOKIESECRET';
   }
 }
-const COOKIE_MAX_AGE = process.env.COOKIE_MAX_AGE ? ms(process.env.COOKIE_MAX_AGE) : '30 days';
+const COOKIE_MAX_AGE = ms(process.env.COOKIE_MAX_AGE ? process.env.COOKIE_MAX_AGE : '30 days');
 if (COOKIE_MAX_AGE === undefined) {
   console.error(
     'If you set COOKIE_MAX_AGE, it must be a value that can be parsed by the ms library.  e.g. 30 days or 1 hour',
