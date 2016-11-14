@@ -1,6 +1,6 @@
 {
   "name": "moped-runtime",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "main": "lib/index.js",
   "description": "Runtime for moped",
   "keywords": [],

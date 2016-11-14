@@ -93,7 +93,7 @@ if (process.env.NODE_ENV === 'production') {
     return prepareResponse(fs.readFileSync(filename), headers);
   }
 
-  lsr.sync(process.cwd() + '/build').filter(file => file.isFile()).forEach(file => {
+  lsr.sync(process.cwd() + '/build/frontend').filter(file => file.isFile()).forEach(file => {
     const response = prepare(
       file.fullPath,
       {
@@ -107,7 +107,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 
   const htmlResponse = prepare(
-    process.cwd() + '/build/index.html',
+    process.cwd() + '/build/frontend/index.html',
     {'content-type': 'html', 'cache-control': '10 minutes'},
   );
   app.get('*', (req, res, next) => {
