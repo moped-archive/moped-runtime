@@ -1,0 +1,50 @@
+{
+  "name": "moped-runtime",
+  "version": "0.0.15",
+  "main": "lib/index.js",
+  "description": "Runtime for moped",
+  "keywords": [],
+  "files": [
+    "lib/",
+    "server.js"
+  ],
+  "dependencies": {
+    "babel-runtime": "^6.3.19",
+    "body-parser": "^1.15.2",
+    "cookie-session": "^2.0.0-alpha.1",
+    "express": "^4.14.0",
+    "lsr": "^1.0.0",
+    "lusca": "^1.4.1",
+    "ms": "^0.7.2",
+    "passport": "^0.3.2",
+    "prepare-response": "^1.1.3",
+    "promise": "^7.1.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-router": "4.0.0-alpha.5",
+    "styled-components": "^1.0.10",
+    "then-request": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-preset-forbeslindesay": "*",
+    "eslint": "*",
+    "eslint-config-forbeslindesay": "*",
+    "testit": "*"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "babel src --out-dir lib",
+    "lint": "eslint src",
+    "test": "babel-node test/index.js && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mopedjs/moped-runtime.git"
+  },
+  "author": {
+    "name": "Forbes Lindesay",
+    "url": "http://github.com/ForbesLindesay"
+  },
+  "license": "MIT"
+}
