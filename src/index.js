@@ -38,7 +38,7 @@ app.use(session({
   keys: COOKIE_SECRET.split(':'),
   signed: true,
   maxAge: COOKIE_MAX_AGE,
-  secureProxy: process.env.NODE_ENV === 'production',
+  secureProxy: process.env.INSECURE_COOKIE !== 'true' && process.env.NODE_ENV === 'production',
   httpOnly: true,
 }));
 
