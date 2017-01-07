@@ -8,7 +8,8 @@ const express = require('express');
 const lusca = require('lusca');
 const ms = require('ms');
 const passport = require('passport');
-global.Promise = require('promise');
+// eslint-disable-next-line
+Promise = require('promise');
 
 const app = express();
 
