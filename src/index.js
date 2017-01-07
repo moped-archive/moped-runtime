@@ -75,13 +75,18 @@ app.post('/logout', (req, res, next) => {
   res.send('');
 });
 
-let BASE_PATH = path.resolve('./build/backend');
+let server;
 if (process.env.NODE_ENV !== 'production') {
-  BASE_PATH = path.resolve('./src/server');
+  if (require('moped-scripts').loadServerLive) {
+    server = require('moped-scripts').loadServerLive(path.resolve('./src/server'));
+  } else {
+    server = require(path.resolve('./src/server')).default;
+  }
+} else {
+  server = require(path.resolve('./build/backend')).default;
 }
 
-const server = require(BASE_PATH);
-app.use(server.default);
+app.use(server);
 
 if (process.env.NODE_ENV === 'production') {
   const fs = require('fs');
