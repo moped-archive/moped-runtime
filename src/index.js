@@ -8,8 +8,7 @@ const express = require('express');
 const lusca = require('lusca');
 const ms = require('ms');
 const passport = require('passport');
-const Promise = require('promise');
-const createServer = require('../server');
+global.Promise = require('promise');
 
 const app = express();
 
@@ -49,11 +48,22 @@ app.use(lusca.xframe('DENY'));
 app.use(lusca.xssProtection());
 app.use(lusca.nosniff());
 
+let server;
+if (process.env.NODE_ENV !== 'production') {
+  if (require('moped-scripts').loadServerLive) {
+    server = require('moped-scripts').loadServerLive(path.resolve('./src/server'));
+  } else {
+    server = require(path.resolve('./src/server')).default;
+  }
+} else {
+  server = require(path.resolve('./build/backend')).default;
+}
+
 passport.serializeUser((user, done) => {
-  Promise.resolve(createServer._serializeUser(user)).nodeify(done);
+  Promise.resolve(server._serializeUser(user)).nodeify(done);
 });
 passport.deserializeUser((id, done) => {
-  Promise.resolve(createServer._deserializeUser(id)).nodeify(done);
+  Promise.resolve(server._deserializeUser(id)).nodeify(done);
 });
 
 app.use(passport.initialize());
@@ -74,17 +84,6 @@ app.post('/logout', (req, res, next) => {
   req.logout();
   res.send('');
 });
-
-let server;
-if (process.env.NODE_ENV !== 'production') {
-  if (require('moped-scripts').loadServerLive) {
-    server = require('moped-scripts').loadServerLive(path.resolve('./src/server'));
-  } else {
-    server = require(path.resolve('./src/server')).default;
-  }
-} else {
-  server = require(path.resolve('./build/backend')).default;
-}
 
 app.use(server);
 
