@@ -1,3 +1,4 @@
+global.Promise = require('promise');
 if (process.env.NODE_ENV !== 'production') {
   require('moped-scripts').register();
 }
@@ -8,8 +9,7 @@ const express = require('express');
 const lusca = require('lusca');
 const ms = require('ms');
 const passport = require('passport');
-// eslint-disable-next-line
-Promise = require('promise');
+const Promise = require('promise');
 
 const app = express();
 
