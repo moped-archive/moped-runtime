@@ -20,6 +20,7 @@ function createServer(options) {
   var app = express.Router();
   app._serializeUser = options.serializeUser || defaultSerializer;
   app._deserializeUser = options.deserializeUser || defaultSerializer;
+  return app;
 }
 
 module.exports = createServer;
